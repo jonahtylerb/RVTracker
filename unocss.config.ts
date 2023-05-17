@@ -21,7 +21,7 @@ export default defineConfig({
     }),
     presetTagify(),
     presetDaisy({
-      themes: ["forest"],
+      themes: ["light", "dark"],
     }),
   ],
   transformers: [transformerVariantGroup(), transformerDirectives()],
