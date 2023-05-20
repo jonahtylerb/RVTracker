@@ -12,8 +12,11 @@
   "dependencies": {
     "@astrojs/solid-js": "^2.1.0",
     "@fontsource/montserrat": "^4.5.14",
+    "@vite-pwa/astro": "^0.0.5",
     "astro": "^2.1.9",
-    "solid-js": "^1.4.3"
+    "localforage": "^1.10.0",
+    "solid-js": "^1.4.3",
+    "vite-plugin-pwa": "^0.15.0"
   },
   "devDependencies": {
     "@iconify-json/tabler": "^1.1.75",

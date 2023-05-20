@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Visit from "../components/Visit";
+---
+
+<Layout title="Add a Visit">
+  <main class="container">
+    <header class="py-10">
+      <h1 class="text-4xl font-bold">Add a Visit for:</h1>
+    </header>
+    <Visit client:load />
+  </main>
+</Layout>

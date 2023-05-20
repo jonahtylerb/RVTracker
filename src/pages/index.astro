@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import RV from "../components/RV";
+import RVs from "../components/RVs";
 ---
 
 <Layout title="RV Tracker">
@@ -8,10 +8,11 @@ import RV from "../components/RV";
     <header class="py-10">
       <h1 class="text-4xl font-bold">RV Tracker!</h1>
     </header>
-    <RV />
-    <button
+    <RVs client:load />
+    <a
+      href="/RV"
       class="bg-base-300 fixed bottom-0 right-0 m-5 rounded-full w-15 h-15 text-3xl btn"
-      ><span class="i-tabler-plus"></span></button
+      ><span class="i-tabler-plus"></span></a
     >
   </main>
 </Layout>

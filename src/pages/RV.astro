@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Form from "../components/Form";
+---
+
+<Layout title="Add a Return Visit">
+  <main class="container">
+    <header class="py-10">
+      <h1 class="text-4xl font-bold">Add a Return Visit</h1>
+    </header>
+    <Form client:load />
+  </main>
+</Layout>
