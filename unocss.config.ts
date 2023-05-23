@@ -12,7 +12,9 @@ import { presetDaisy } from "unocss-preset-daisy";
 export default defineConfig({
   presets: [
     presetUno(),
-    presetAttributify(),
+    presetAttributify({
+      prefix: "data-",
+    }),
     presetIcons({
       extraProperties: {
         display: "inline-block",

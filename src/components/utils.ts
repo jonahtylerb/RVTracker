@@ -1,4 +1,4 @@
-export type RV = {
+export type RVType = {
   id: string;
   name: string;
   address: string;

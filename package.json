@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/solid-js": "^2.1.0",
+    "@astrojs/svelte": "^2.2.0",
     "@fontsource/montserrat": "^4.5.14",
     "@vite-pwa/astro": "^0.0.5",
-    "astro": "^2.1.9",
+    "astro": "^2.5.4",
     "localforage": "^1.10.0",
-    "solid-js": "^1.4.3",
+    "svelte": "^3.54.0",
     "vite-plugin-pwa": "^0.15.0"
   },
   "devDependencies": {
