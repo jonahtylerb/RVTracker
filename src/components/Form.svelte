@@ -1,44 +1,61 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { RVType, uid } from "./utils";
+  import { uid } from "./utils";
+  import type { RVType } from "./utils";
   import * as localforage from "localforage";
+  import JSConfetti from "js-confetti";
+
+  let confetti: JSConfetti;
 
   let RV: RVType = {
-    id: "",
+    id: uid(),
     name: "",
     address: "",
     gender: "",
-    date: "",
-    time: "",
+    date: new Date().toISOString().split("T")[0],
+    time:
+      new Date().toTimeString().split(" ")[0].split(":")[0] +
+      ":" +
+      new Date().toTimeString().split(" ")[0].split(":")[1],
     notes: [],
-    returnDate: "",
-    returnTime: "",
+    tags: [],
+    returnDate: new Date(new Date().setDate(new Date().getDate() + 7))
+      .toISOString()
+      .split("T")[0],
+    returnTime:
+      new Date().toTimeString().split(" ")[0].split(":")[0] +
+      ":" +
+      new Date().toTimeString().split(" ")[0].split(":")[1],
   };
   onMount(() => {
+    confetti = new JSConfetti();
+
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     if (!id) return;
     localforage.getItem(id).then((curRV) => {
       if (curRV) {
         RV = curRV as RVType;
+        tagInput = RV.tags.join(",");
       }
     });
   });
-  const save = (e: SubmitEvent) => {
-    const form = e.target as HTMLFormElement;
-    const values = new FormData(form);
+  let tagInput = "";
+  const save = () => {
     RV = {
-      id: RV.id || uid(),
-      name: values.get("name")?.toString() || "",
-      address: values.get("address")?.toString() || "",
-      gender: values.get("gender")?.toString() || "",
-      date: values.get("date")?.toString() || "",
-      time: values.get("time")?.toString() || "",
-      notes: [values.get("notes")?.toString() || ""],
-      returnDate: values.get("returnDate")?.toString() || "",
-      returnTime: values.get("returnTime")?.toString() || "",
+      id: RV.id,
+      name: RV.name,
+      address: RV.address,
+      gender: RV.gender,
+      date: RV.date.toString(),
+      time: RV.time.toString(),
+      notes: [RV.notes.toString()],
+      tags: tagInput ? [...tagInput.split(",")] : [],
+      returnDate: RV.returnDate.toString(),
+      returnTime: RV.returnTime.toString(),
     };
     localforage.setItem(RV.id, RV).then(() => {
+      confetti.addConfetti();
       window.location.href = "#success";
     });
   };
@@ -51,7 +68,7 @@
     <div class="form-control grow">
       <input
         required
-        value={RV.name}
+        bind:value={RV.name}
         name="name"
         type="text"
         placeholder="Name"
@@ -69,8 +86,8 @@
         type="radio"
         name="gender"
         class="radio peer z-10"
+        bind:group={RV.gender}
         value="M"
-        checked={RV.gender === "M"}
       />
     </div>
     <div class="form-control flex-center mt-6">
@@ -82,7 +99,7 @@
         name="gender"
         class="radio peer z-10"
         value="W"
-        checked={RV.gender === "W"}
+        bind:group={RV.gender}
       />
     </div>
   </div>
@@ -90,7 +107,7 @@
     <input
       required
       name="address"
-      value={RV.address}
+      bind:value={RV.address}
       type="text"
       placeholder="Address"
       class="input input-bordered peer z-10"
@@ -108,7 +125,7 @@
         name="date"
         type="date"
         class="input input-bordered peer z-10"
-        value={RV.date || new Date().toISOString().split("T")[0]}
+        bind:value={RV.date}
       />
     </div>
     <div class="form-control w-full">
@@ -119,25 +136,36 @@
         name="time"
         type="time"
         class="input input-bordered peer z-10"
-        value={RV.time ||
-          new Date().toTimeString().split(" ")[0].split(":")[0] +
-            ":" +
-            new Date().toTimeString().split(" ")[0].split(":")[1]}
+        bind:value={RV.time}
       />
     </div>
   </div>
+  {#each RV.notes as note, i}
+    <div class="form-control">
+      <textarea
+        name="notes"
+        bind:value={note}
+        placeholder={`Notes for visit #${i + 1}`}
+        class="textarea textarea-bordered peer z-10"
+        rows="2"
+      />
+      <label class={labelClass} for="notes">
+        <span class="label-text">{`Notes for visit #${i + 1}`}</span>
+      </label>
+    </div>
+  {/each}
+
   <div class="form-control">
     <textarea
-      name="notes"
-      value={RV.notes}
-      placeholder="Notes"
+      name="tags"
+      bind:value={tagInput}
+      placeholder="comma separated list of tags"
       class="textarea textarea-bordered peer z-10"
     />
     <label class={labelClass} for="notes">
-      <span class="label-text">Notes</span>
+      <span class="label-text">Tags</span>
     </label>
   </div>
-
   <div class="flex flex-row flex-center gap-2 mt-10">
     <div class="form-control w-full">
       <label for="returnDate">
@@ -147,10 +175,7 @@
         name="returnDate"
         type="date"
         class="input input-bordered peer z-10"
-        value={RV.returnDate ||
-          new Date(new Date().setDate(new Date().getDate() + 7))
-            .toISOString()
-            .split("T")[0]}
+        bind:value={RV.returnDate}
       />
     </div>
     <div class="form-control w-full">
@@ -161,10 +186,7 @@
         name="returnTime"
         type="time"
         class="input input-bordered peer z-10"
-        value={RV.returnTime ||
-          new Date().toTimeString().split(" ")[0].split(":")[0] +
-            ":" +
-            new Date().toTimeString().split(" ")[0].split(":")[1]}
+        bind:value={RV.returnTime}
       />
     </div>
   </div>
@@ -184,7 +206,7 @@
       <span class="i-tabler-x text-base" />
     </button>
   </div>
-  <div class="modal" id="success">
+  <div class="modal z-10000" id="success">
     <div class="modal-box">
       <h3 class="font-bold text-lg">Saved successfully</h3>
       <div class="modal-action">

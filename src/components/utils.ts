@@ -6,6 +6,7 @@ export type RVType = {
   date: string;
   time: string;
   notes: string[];
+  tags: string[];
   returnDate: string;
   returnTime: string;
 };

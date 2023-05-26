@@ -13,16 +13,19 @@
     "@astrojs/svelte": "^2.2.0",
     "@fontsource/montserrat": "^4.5.14",
     "@vite-pwa/astro": "^0.0.5",
-    "astro": "^2.5.4",
+    "astro": "^2.5.5",
+    "fuse.js": "^6.6.2",
+    "fuzzysort": "^2.0.4",
+    "js-confetti": "^0.11.0",
     "localforage": "^1.10.0",
-    "svelte": "^3.54.0",
-    "vite-plugin-pwa": "^0.15.0"
+    "svelte": "^3.59.1",
+    "vite-plugin-pwa": "^0.15.1"
   },
   "devDependencies": {
-    "@iconify-json/tabler": "^1.1.75",
-    "@unocss/reset": "^0.50.6",
-    "daisyui": "^2.51.5",
-    "unocss": "^0.50.6",
+    "@iconify-json/tabler": "^1.1.77",
+    "@unocss/reset": "^0.50.8",
+    "daisyui": "^2.51.6",
+    "unocss": "^0.50.8",
     "unocss-preset-daisy": "^4.0.0"
   }
 }
