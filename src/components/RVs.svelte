@@ -1,6 +1,7 @@
 <script lang="ts">
   import localforage from "localforage";
   import type { RVType } from "./utils";
+  import ShareLink from "./ShareLink.svelte";
   import Fuse from "fuse.js";
   import { onMount } from "svelte";
   import { flip } from "svelte/animate";
@@ -67,6 +68,7 @@
             </div>
           {/if}
         </div>
+        <ShareLink {RV} />
         <div
           class="group-hover:bottom-0 duration-300 transition-all absolute bottom--100px bg-base-300 w-full p-5 flex flex-row gap-2"
           data-children="flex flex-row gap-1"
