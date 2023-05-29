@@ -6,6 +6,7 @@ export interface Props {
 const { title } = Astro.props;
 
 import "@fontsource/montserrat";
+import Theme from "../components/Theme.svelte";
 ---
 
 <!DOCTYPE html>
@@ -23,7 +24,15 @@ import "@fontsource/montserrat";
     <meta name="theme-color" content="#ffffff" />
     <title>{title}</title>
   </head>
-  <body class="text-base family-montserrat of-x-hidden">
+  <body class="text-base family-montserrat of-x-hidden pb-10">
+    <Theme client:load />
+    <a
+      href="/settings"
+      class="absolute top-0 right-0 m-1 text-xl btn btn-ghost"
+    >
+      <span class="sr-only">Settings</span>
+      <span class="i-tabler-settings"></span>
+    </a>
     <slot />
   </body>
 </html>

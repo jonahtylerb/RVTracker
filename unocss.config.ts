@@ -8,6 +8,7 @@ import {
   transformerVariantGroup,
 } from "unocss";
 import { presetDaisy } from "unocss-preset-daisy";
+import { themes } from "./src/components/utils";
 
 export default defineConfig({
   presets: [
@@ -23,7 +24,7 @@ export default defineConfig({
     }),
     presetTagify(),
     presetDaisy({
-      themes: ["light", "dark"],
+      themes: themes,
     }),
   ],
   transformers: [transformerVariantGroup(), transformerDirectives()],

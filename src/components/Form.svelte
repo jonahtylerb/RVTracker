@@ -17,7 +17,7 @@
       new Date().toTimeString().split(" ")[0].split(":")[0] +
       ":" +
       new Date().toTimeString().split(" ")[0].split(":")[1],
-    notes: [],
+    notes: [""],
     tags: [],
     returnDate: new Date(new Date().setDate(new Date().getDate() + 7))
       .toISOString()
@@ -27,21 +27,20 @@
       ":" +
       new Date().toTimeString().split(" ")[0].split(":")[1],
   };
-  onMount(() => {
+  onMount(async () => {
     confetti = new JSConfetti();
 
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     if (!id) return;
-    localforage.getItem(id).then((curRV) => {
-      if (curRV) {
-        RV = curRV as RVType;
-        tagInput = RV.tags.join(",");
-      }
-    });
+    const curRV = await localforage.getItem(id);
+    if (curRV) {
+      RV = curRV as RVType;
+      tagInput = RV.tags.join(",");
+    }
   });
   let tagInput = "";
-  const save = () => {
+  const save = async () => {
     RV = {
       id: RV.id,
       name: RV.name,
@@ -54,10 +53,10 @@
       returnDate: RV.returnDate.toString(),
       returnTime: RV.returnTime.toString(),
     };
-    localforage.setItem(RV.id, RV).then(() => {
-      confetti.addConfetti();
-      window.location.href = "#success";
-    });
+
+    await localforage.setItem(RV.id, RV);
+    confetti.addConfetti();
+    window.location.href = "#success";
   };
   const labelClass =
     "label translate-0 peer-placeholder-shown:translate-y-100% order--1 duration-300 transition-translate";

@@ -1,3 +1,5 @@
+import localforage from "localforage";
+
 export type RVType = {
   id: string;
   name: string;
@@ -19,3 +21,32 @@ export const uid = () => {
     ).toString(36)
   );
 };
+
+export const themes = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+];

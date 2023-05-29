@@ -6,7 +6,7 @@
 
   let confetti: JSConfetti;
 
-  onMount(() => {
+  onMount(async () => {
     confetti = new JSConfetti();
     const params = new URLSearchParams(window.location.search);
     const get = (name: string) => {
@@ -24,10 +24,13 @@
       returnDate: get("rd"),
       returnTime: get("rt"),
     };
-    localforage.setItem(RV.id, RV).then(() => {
+    try {
+      await localforage.setItem(RV.id, RV);
       confetti.addConfetti();
       window.location.href = "#saved";
-    });
+    } catch (e) {
+      console.error(e);
+    }
   });
 </script>
 

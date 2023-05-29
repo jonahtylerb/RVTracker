@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import Themes from "../components/Themes.svelte";
+---
+
+<Layout title="Settings">
+  <main class="container">
+    <header class="py-10 flex flex-col gap-5">
+      <a href="/" class="link flex items-center"
+        ><span class="i-tabler-arrow-left"></span>Back</a
+      >
+      <h1 class="text-4xl font-bold">Settings</h1>
+    </header>
+    <Themes client:load />
+  </main>
+</Layout>

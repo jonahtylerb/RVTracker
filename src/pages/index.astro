@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import RVs from "../components/RVs.svelte";
+import Demo from "../components/Demo.svelte";
 ---
 
 <Layout title="RV Tracker">
@@ -11,8 +12,9 @@ import RVs from "../components/RVs.svelte";
     <RVs client:load />
     <a
       href="/RV"
-      class="bg-base-300 fixed bottom-0 right-0 m-5 rounded-full w-15 h-15 text-3xl btn"
+      class="fixed bottom-0 right-0 m-5 rounded-full w-15 h-15 text-3xl btn btn-secondary"
       ><span class="i-tabler-plus"></span></a
     >
+    <Demo client:load />
   </main>
 </Layout>
