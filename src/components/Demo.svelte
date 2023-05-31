@@ -30,8 +30,12 @@
       options.
     </p>
     <p>
-      This web app is installable on Windows/Mac/Android devices (Sorry IOS)
-      just look for the popup menu that will open soon!
+      This web app has many color themes. Try them out by clicking the settings
+      button at the top right of the page.
+    </p>
+    <p>
+      This web app is installable on Windows/Mac/Android devices (Sorry IOS) The
+      installation might be diffrent depending on your device.
     </p>
     <p>
       PS: I don't recive any of the data that you enter into this site. In fact,

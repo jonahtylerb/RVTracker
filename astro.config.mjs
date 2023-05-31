@@ -15,7 +15,9 @@ export default defineConfig({
         enabled: true,
       },
       workbox: {
-        globPatterns: ["**/*.{ts,tsx,astro,ico,png,svg,jpg,jpeg,gif,webp}"],
+        globPatterns: [
+          "**/*.{ts,tsx,astro,ico,png,svelte,svg,jpg,jpeg,gif,webp}",
+        ],
       },
       manifest: {
         name: "RVTracker",

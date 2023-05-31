@@ -28,5 +28,6 @@
 <button
   on:click={share}
   class="btn btn-ghost btn-sm btn-square absolute size-10 p-0 right-0 top-0 rounded-none rounded-bl-$rounded-box! group-hover:translate-x-0 translate-x-200%"
-  ><span class="i-tabler-share" /></button
->
+  ><span class="i-tabler-share" />
+  <span class="sr-only">Share</span>
+</button>

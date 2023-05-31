@@ -4,6 +4,7 @@
   import type { RVType } from "./utils";
   import * as localforage from "localforage";
   import JSConfetti from "js-confetti";
+  import Tags from "./Tags.svelte";
 
   let confetti: JSConfetti;
 
@@ -27,6 +28,7 @@
       ":" +
       new Date().toTimeString().split(" ")[0].split(":")[1],
   };
+
   onMount(async () => {
     confetti = new JSConfetti();
 
@@ -36,10 +38,8 @@
     const curRV = await localforage.getItem(id);
     if (curRV) {
       RV = curRV as RVType;
-      tagInput = RV.tags.join(",");
     }
   });
-  let tagInput = "";
   const save = async () => {
     RV = {
       id: RV.id,
@@ -48,8 +48,8 @@
       gender: RV.gender,
       date: RV.date.toString(),
       time: RV.time.toString(),
-      notes: [RV.notes.toString()],
-      tags: tagInput ? [...tagInput.split(",")] : [],
+      notes: [...RV.notes],
+      tags: RV.tags,
       returnDate: RV.returnDate.toString(),
       returnTime: RV.returnTime.toString(),
     };
@@ -154,17 +154,8 @@
     </div>
   {/each}
 
-  <div class="form-control">
-    <textarea
-      name="tags"
-      bind:value={tagInput}
-      placeholder="comma separated list of tags"
-      class="textarea textarea-bordered peer z-10"
-    />
-    <label class={labelClass} for="notes">
-      <span class="label-text">Tags</span>
-    </label>
-  </div>
+  <Tags {labelClass} bind:tags={RV.tags} />
+
   <div class="flex flex-row flex-center gap-2 mt-10">
     <div class="form-control w-full">
       <label for="returnDate">
